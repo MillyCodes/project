@@ -1,0 +1,8 @@
+<h1 class="page-header"><%= @artist.name %></h1>  
+  <ul>
+    <% @tracks(country: 'US').each(0..4) do |track| %>
+      <li>
+        <%= track.name %>
+      </li>
+    <% end %>
+  </ul>

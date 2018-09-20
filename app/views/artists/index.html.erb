@@ -1,0 +1,13 @@
+<h2><%= @artist.name %></h2>  
+<h4>Top Tracks(spotify api)</h4>
+  <ul>
+    <% @tracks[0..4].each do |track| %>
+      <li>
+        <%= track.name %>
+      </li>
+    <% end %>
+  </ul>
+  <h4>Artist Bio(last.fm api)</h4>
+  <p><%= @artistbio %></p>
+
+<h4>Video for each top track(youtube api)</h4>

@@ -1,13 +1,16 @@
 <h2><%= @artist.name %></h2>  
+  <h4>Artist Bio( from last.fm api)</h4>
+  <p><%= @artistbio %></p>
+
 <h4>Top Tracks(spotify api)</h4>
   <ul>
-    <% @tracks[0..4].each do |track| %>
+    <% @tracks[0..4].each_with_index do |track, i| %>
       <li>
-        <%= track.name %>
+        #<%= i += 1 %> : <%= track.name %>(spotify api)
+        
+        <% @videoId = @videos.where(q: "music video for #{@artist.name} #{track.name}", order: 'relevance').first.id %>
+        <h4>Video(from yt api)</h4>
+          <iframe width="560" height="315" src="//www.youtube.com/embed/<%=@videoId%>" frameborder="0" allowfullscreen></iframe>
       </li>
     <% end %>
   </ul>
-  <h4>Artist Bio(last.fm api)</h4>
-  <p><%= @artistbio %></p>
-
-<h4>Video for each top track(youtube api)</h4>

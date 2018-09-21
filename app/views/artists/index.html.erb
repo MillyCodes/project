@@ -1,19 +1,47 @@
 <br><br><br><br><br>
-<div class="results justify-content-center w-75 h-100 bg-light m-auto">
-<h2><%= @artist.name %></h2>  
-  <h4>Artist Bio( from last.fm api)</h4>
-  <p><%= @artistbio %></p>
-
-<h4>Top Tracks(spotify api)</h4>
-  <ul>
-    <% @tracks[0..4].each_with_index do |track, i| %>
-      <li>
-        #<%= i += 1 %> : <%= track.name %>(spotify api)
-        <% @videoId = @videos.where(q: "music video for #{@artist.name} #{track.name}", order: 'relevance').first.id %>
-        <h4>Video(from yt api)</h4>
-          <iframe width="560" height="315" src="//www.youtube.com/embed/<%=@videoId%>" frameborder="0" allowfullscreen></iframe>
-          
-      </li>
-    <% end %>
-  </ul>
+<%# ---- FULL CONTAINER FOR ALL ---- %>
+<div class="justify-content-center align-items-center w-75 h-100 h-75 bg-transparent m-auto">
+  <%# ---- PART ONE ::: ARTIST BIO ---- %>
+  <div class="intro col-lg-6 p-2 mb-2 rounded">
+    <h2><%= @artist.name %></h2>  
+      <h6>Artist Bio( from last.fm api)</h6>
+      
+      <p><%= truncate( @artistbio, escape: false, length: 450) %></p>
+      <p><%=link_to "Read more...", @artistlastfm["url"] , target: "_blank", rel: "nofollow" %></p>
   </div>
+  <%# ---- PART 2 :: MUSIC PLAYER COMPONENT ---- %>
+  <div class="player d-flex align-items-start col-lg-12 p-0 mt-2 rounded">
+    <%# ---- 2AAA TRACK PLAYLIST ---- %>
+    <div class="tracklist row col-lg-4 p-1">
+      <div class="m-auto border border-dark"><h4>Top Tracks</h4>
+        <button class="btn">Play</button>
+        <table class="table table-hover table-striped custab rounded">
+          <% @tracks[0..4].each_with_index do |track, i| %>
+                <tr>
+                    <td class="p-1"><%= i + 1%></td>
+                    <td class-"p-1"><%= truncate( track.name, length: 30) %></td>
+                </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+    <%# ---- 2BBB EMBED VIDEO HERE ---- %>
+    <div class="videoplayer row col-lg-8 p-1 border border-dark">
+      <div class="m-auto border border-dark w-100"><h4>VIDEOS</h4>
+        <% @tracks[0..4].each_with_index do |track, i| %>
+        <div class="videos">
+          <% @videoId = @videos.where(q: "music video for #{@artist.name} #{track.name}", order: 'relevance').first.id %>
+          <h4>Video(from yt api)</h4>
+          <iframe src="//www.youtube.com/embed/<%=@videoId%>" frameborder="0" allowfullscreen></iframe>
+        <div>
+        <% end %>
+      </div>
+    </div>
+
+    <%# ---- comments ---- %>
+    <%# ---- comments ---- %>
+
+
+
+  </div><%# ---- <---CLOSES PAGE CONTAINER ---- %>
+    

@@ -17,16 +17,24 @@
 // <% @videoId = @videos.where(q: "music video for #{@artist.name} #{track.name}", order: 'relevance').first.id %>
 // <h4>Video(from yt api)</h4>
 // <iframe width="560" height="315" src="//www.youtube.com/embed/<%=@videoId%>" frameborder="0" allowfullscreen></iframe>
+// font-family: 'Open Sans', sans-serif; 400 & 600
+// font-family: 'Cormorant', serif; 400 & 700
 
 @import "bootstrap";
 
 body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
   margin:0;
   padding:0;
   background:url(https://www.planwallpaper.com/static/images/Downlaod-Michael-Jackson-Wallpaper-HD.jpg);
   background-size:cover;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cormorant', serif;
+  font-weight: 700;
+}
 .search {
   position:absolute;
   top:50%;
@@ -54,3 +62,22 @@ body {
   color:#666;
   
 }
+.intro, .player {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.custab{
+  border: 1px solid #ccc;
+  padding: 5px;
+  margin: 5% 0;
+  box-shadow: 3px 3px 2px #ccc;
+  transition: 0.5s;
+  }
+.custab:hover{
+  box-shadow: 3px 3px 0px transparent;
+  transition: 0.5s;
+  }
+// <div class="videos"><% @videoId = @videos.where(q: "music video for #{@artist.name} #{track.name}", order: 'relevance').first.id %>
+// <h4>Video(from yt api)</h4>
+// <iframe width="560" height="315" src="//www.youtube.com/embed/<%=@videoId%>" frameborder="0" allowfullscreen></iframe>
+// <div>

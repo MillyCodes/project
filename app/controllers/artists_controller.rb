@@ -13,9 +13,10 @@ class ArtistsController < ApplicationController
         lastfm = Lastfm.new(ENV["LASTFM_KEY"], ENV["LASTFM_SECRET"])
         @videos = Yt::Collections::Videos.new
         artistspotify = RSpotify::Artist.search(params[:artist_name])
-        artistlastfm = lastfm.artist.get_info(artist: params[:artist_name], autocorrect: 1)
+        @artistlastfm = lastfm.artist.get_info(artist: params[:artist_name], autocorrect: 1)
         
-        @artistbio = artistlastfm["bio"]["summary"]
+        @artistbio = @artistlastfm["bio"]["content"]
+        
         puts artistspotify
         @artist = artistspotify.first
         @tracks = @artist.top_tracks(:US)

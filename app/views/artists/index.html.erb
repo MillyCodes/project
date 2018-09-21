@@ -9,8 +9,10 @@
     <% @tracks[0..4].each_with_index do |track, i| %>
       <li>
         #<%= i += 1 %> : <%= track.name %>(spotify api)
-        
-        
+        <% @videoId = @videos.where(q: "music video for #{@artist.name} #{track.name}", order: 'relevance').first.id %>
+        <h4>Video(from yt api)</h4>
+          <iframe width="560" height="315" src="//www.youtube.com/embed/<%=@videoId%>" frameborder="0" allowfullscreen></iframe>
+          
       </li>
     <% end %>
   </ul>

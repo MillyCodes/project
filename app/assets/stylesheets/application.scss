@@ -13,4 +13,44 @@
  */
 
  // Custom bootstrap variables must be set or imported *before* bootstrap.
+//
+// <% @videoId = @videos.where(q: "music video for #{@artist.name} #{track.name}", order: 'relevance').first.id %>
+// <h4>Video(from yt api)</h4>
+// <iframe width="560" height="315" src="//www.youtube.com/embed/<%=@videoId%>" frameborder="0" allowfullscreen></iframe>
+
 @import "bootstrap";
+
+body {
+  margin:0;
+  padding:0;
+  background:url(https://www.planwallpaper.com/static/images/Downlaod-Michael-Jackson-Wallpaper-HD.jpg);
+  background-size:cover;
+}
+
+.search {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:300px;
+  height:80px;
+  background:#fff;
+  box-shadow:0 5px 20px rgba(0,0,0,.5);
+  border-radius:4px;
+  transition:width .5s;
+  overflow:hidden;
+}
+
+.search input {
+  position:absolute;
+  top:10px;
+  left:10px;
+  width:calc(100% - 90px);
+  height:60px;
+  border:none;
+  outline:none;
+  font-size:36px;
+  padding:0 10px;
+  color:#666;
+  
+}

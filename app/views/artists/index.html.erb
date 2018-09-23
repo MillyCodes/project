@@ -5,10 +5,11 @@
   <div class="intro col-lg-6 p-2 mb-2 rounded">
     <h2><%= @artist.name %></h2>  
       <h6>Artist Bio( from last.fm api)</h6>
-      
       <p><%= truncate( @artistbio, escape: false, length: 450) %></p>
       <p><%=link_to "Read more...", @artistlastfm["url"] , target: "_blank", rel: "nofollow" %></p>
   </div>
+
+
   <%# ---- PART 2 :: MUSIC PLAYER COMPONENT ---- %>
   <div class="player d-flex align-items-start col-lg-12 p-0 mt-2 rounded">
     <%# ---- 2AAA TRACK PLAYLIST ---- %>
@@ -17,25 +18,21 @@
         <button class="btn">Play</button>
         <table class="table table-hover table-striped custab rounded">
           <% @tracks[0..4].each_with_index do |track, i| %>
-                <tr>
-                    <td class="p-1"><%= i + 1%></td>
-                    <td class-"p-1"><%= truncate( track.name, length: 30) %></td>
-                </tr>
+            <tr>
+              <td class="p-1"><%= i + 1%></td>
+              <td><%= link_to truncate( track.name, length: 30), :action => :new, remote: true, id: "ajaxcall" %></td>
+
+            </tr>
           <% end %>
         </table>
       </div>
     </div>
     <%# ---- 2BBB EMBED VIDEO HERE ---- %>
     <div class="videoplayer row col-lg-8 p-1 border border-dark">
-      <div class="m-auto border border-dark w-100"><h4>VIDEOS</h4>
-        <% @tracks[0..4].each_with_index do |track, i| %>
-        <div class="videos">
-          <% @videoId = @videos.where(q: "music video for #{@artist.name} #{track.name}", order: 'relevance').first.id %>
-          <h4>Video(from yt api)</h4>
-          <iframe src="//www.youtube.com/embed/<%=@videoId%>" frameborder="0" allowfullscreen></iframe>
-        <div>
-        <% end %>
-      </div>
+        <div id="videodiv">
+        <%= render partial: "artists/video" %>
+        </div>
+    </div>
     </div>
 
     <%# ---- comments ---- %>

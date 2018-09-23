@@ -20,10 +20,21 @@ class ArtistsController < ApplicationController
         puts artistspotify
         @artist = artistspotify.first
         @tracks = @artist.top_tracks(:US)
+
+        @tracks[0..4].each_with_index do |track, i|
+          @videoId = @videos.where(q: "music video for #{@artist.name} #{track.name}", order: 'relevance').first.id
+          @videoUrl = "<iframe src='//www.youtube.com/embed/#{@videoId}?autoplay=1' frameborder='0' allowfullscreen></iframe>"
+      end
+        
         # <% @videoId = @videos.where(q: "music video for #{@artist.name} #{track.name}", order: 'relevance').first.id %>
         # @videoId = @videos.where(q: params[:artist_name], safe_search: 'none').first.id
     else
         redirect_to root_path
     end  
+  end
+  def new
+    respond_to do |format|
+      format.js {render layout: false} # Add this line to you respond_to block
+    end
   end
 end
